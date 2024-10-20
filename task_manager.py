@@ -1,37 +1,42 @@
+class TaskManagerLogic:
+    def __init__(self, tasks):
+        self.tasks = tasks
 
-tasks = []
+    def add_task(self, description, category, priority, due_date):
 
-def load_tasks(file_manager):
-    global tasks
-    tasks = file_manager.load_tasks()
+        for task in self.tasks:
+            if(task["description"] == description and
+               task["category"] == category and
+               task["priority"] == priority and
+               task["due_date"] == due_date):
+                return False # If there are dupplicates, the task won't be added
 
-def save_tasks(file_manager):
-    file_manager.save_tasks(tasks)
+            
+        #If there are no dupplicates, add the task : 
 
-def add_task(task_description):
-    if task_description == "":
-        raise ValueError("Task description cannot be empty.")
+        task = {
+            "description": description,
+            "category": category,
+            "priority": priority,
+            "due_date": due_date,
+            "completed" : False
+        }
 
-    if any(task['task'] == task_description for task in tasks):
-        raise ValueError(f"Task '{task_description}' already exists.")  
+        self.tasks.append(task)
+        return True
 
-    tasks.append({"task" : task_description, "completed" : False}) 
+    def delete_task(self,index):
+        if 0 <= index < len(self.tasks):
+            del self.tasks[index]
 
-def delete_task(task_num):
-    if 0 <= task_num < len(tasks):
-        tasks.pop(task_num)
+    def complete_task(self, index):
+        if 0 <= index < len(self.tasks):
+            if not self.tasks[index]["completed"]:
+                self.tasks[index]["completed"] = True
+                return True
+            else:
+                return False
+            
+    def get_tasks(self):
+        return self.tasks
     
-    else:
-        raise IndexError("Invalid task number.")
-
-def complete_task(task_num):
-    if 0 < task_num < len(tasks):
-        tasks[task_num]["completed"] = True
-    
-    else: 
-        raise IndexError("Invalid task number.")
-    
-
-def get_tasks():
-    return tasks
-
