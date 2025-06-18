@@ -33,7 +33,7 @@ cd ToDoList
 Run the application:
 bash
 
-    python main.pyToDoList
+    python main.py
 
 A simple desktop To-Do List application built with Python and PyQt5. This app allows you to manage tasks with categories, priorities, and due dates, with data stored locally in a JSON file.
 Features
