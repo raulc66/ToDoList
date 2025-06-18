@@ -27,6 +27,7 @@ Usage
     bash
 
 git clone https://github.com/raulc66/ToDoList.git
+
 cd ToDoList
 
 Run the application:
